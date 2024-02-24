@@ -165,7 +165,7 @@ class ApplicationAdmin(SwiftAdmin):
         # 增加子表外键过滤
         schemagroup_table.api.data['applicaiton_id'] = f"${self.pk_name}"
         #log.debug(table.api)
-        schemagroup_tabitem = amis.Tabs.Item(title=_('目录分组'), icon='fa fa-square', body=schemagroup_table)
+        schemagroup_tabitem = amis.Tabs.Item(title=_('导 航 组'), icon='fa fa-square', body=schemagroup_table)
         schemagroup_tabitem.disabled = False
         formtab.tabs.append(schemagroup_tabitem)
         # 构建子表CRUD - schema
@@ -179,7 +179,7 @@ class ApplicationAdmin(SwiftAdmin):
         # 增加子表外键过滤
         schema_table.api.data['applicaiton_id'] = f"${self.pk_name}"
         #log.debug(table.api)
-        schema_tabitem = amis.Tabs.Item(title=_('页面管理'), icon='fa fa-square', body=schema_table)
+        schema_tabitem = amis.Tabs.Item(title=_('导 航 项'), icon='fa fa-square', body=schema_table)
         schema_tabitem.disabled = False
         formtab.tabs.append(schema_tabitem)
         # 构建子表CRUD - model
@@ -230,7 +230,7 @@ class ApplicationAdmin(SwiftAdmin):
             #增加子表外键过滤
             schemagroup_table.api.data['applicaiton_id'] = f"${self.pk_name}"
             #log.debug(table.api)
-            schemagroup_tabitem = amis.Tabs.Item(title=_('目录分组'), icon='fa fa-square', body=schemagroup_table)
+            schemagroup_tabitem = amis.Tabs.Item(title=_('导 航 组'), icon='fa fa-square', body=schemagroup_table)
             schemagroup_tabitem.disabled = False
             formtab.tabs.append(schemagroup_tabitem)
             # 构建子表CRUD - schema
@@ -238,7 +238,7 @@ class ApplicationAdmin(SwiftAdmin):
             #增加子表外键过滤
             schema_table.api.data['applicaiton_id'] = f"${self.pk_name}"
             #log.debug(table.api)
-            schema_tabitem = amis.Tabs.Item(title=_('页面管理'), icon='fa fa-square', body=schema_table)
+            schema_tabitem = amis.Tabs.Item(title=_('导 航 项'), icon='fa fa-square', body=schema_table)
             schema_tabitem.disabled = False
             formtab.tabs.append(schema_tabitem)
             # 构建子表CRUD - model

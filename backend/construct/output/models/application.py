@@ -107,7 +107,7 @@ class Application(SwiftSQLModel, table=True):
                                                     amis_form_item = "",
                                                     amis_table_column = "")
     database_url: str = models.Field(default=None,
-                                                    title='数据库连接(同步)',
+                                                    title='数据库连接',
                                                     nullable=False,
                                                     index=False,
                                                     amis_form_item = "",
@@ -131,19 +131,19 @@ class Application(SwiftSQLModel, table=True):
                                                     amis_form_item = "",
                                                     amis_table_column = "")
     amis_theme: str = models.Field(default=None,
-                                                    title='应用主题',
+                                                    title='amis_theme',
                                                     nullable=False,
                                                     index=False,
                                                     amis_form_item = "",
                                                     amis_table_column = "")
     secret_key: str = models.Field(default=None,
-                                                    title='API秘钥',
+                                                    title='secret_key',
                                                     nullable=False,
                                                     index=False,
                                                     amis_form_item = "",
                                                     amis_table_column = "")
     allow_origins: str = models.Field(default=None,
-                                                    title='跨域访问',
+                                                    title='allow_origins',
                                                     nullable=False,
                                                     index=False,
                                                     amis_form_item = "",

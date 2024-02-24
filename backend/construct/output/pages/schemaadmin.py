@@ -30,7 +30,7 @@ from apps.admin.models.schema import Schema
 
 class SchemaAdmin(SwiftAdmin):
     group_schema = "Application"
-    page_schema = PageSchema(label='页面管理', page_title='页面管理', icon='fa fa-border-all', sort=96)
+    page_schema = PageSchema(label='导 航 项', page_title='导 航 项', icon='fa fa-border-all', sort=96)
     model = Schema
     pk_name = 'schema_id'
     list_per_page = 50

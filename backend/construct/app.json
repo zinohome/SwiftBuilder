@@ -54,13 +54,13 @@
             {
               "table_name": "schemagroup",
               "foreign_key_filter": "applicaiton_id",
-              "title": "目录分组",
+              "title": "导 航 组",
               "icon": "fa fa-square"
             },
             {
               "table_name": "schema",
               "foreign_key_filter": "applicaiton_id",
-              "title": "页面管理",
+              "title": "导 航 项",
               "icon": "fa fa-square"
             },
             {
@@ -74,8 +74,8 @@
             {
               "name": "schemagroup",
               "group_schema": "Application",
-              "label": "目录分组",
-              "title": "目录分组",
+              "label": "导 航 组",
+              "title": "导 航 组",
               "icon": "fa fa-border-all",
               "sort": 97,
               "model": "Schemagroup",
@@ -94,8 +94,8 @@
             {
               "name": "schema",
               "group_schema": "Application",
-              "label": "页面管理",
-              "title": "页面管理",
+              "label": "导 航 项",
+              "title": "导 航 项",
               "icon": "fa fa-border-all",
               "sort": 96,
               "model": "Schema",

@@ -30,7 +30,7 @@ from apps.admin.models.schemagroup import Schemagroup
 
 class SchemagroupAdmin(SwiftAdmin):
     group_schema = "Application"
-    page_schema = PageSchema(label='目录分组', page_title='目录分组', icon='fa fa-border-all', sort=97)
+    page_schema = PageSchema(label='导 航 组', page_title='导 航 组', icon='fa fa-border-all', sort=97)
     model = Schemagroup
     pk_name = 'schemagroup_id'
     list_per_page = 50
