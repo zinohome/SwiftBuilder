@@ -952,6 +952,7 @@ class ModelAdmin(SqlalchemyCrud, BaseActionAdmin):
             disabled=True,
         )
 
+    # zinohome修改部分
     async def get_read_action(self, request: Request) -> Optional[Action]:
         if not self.schema_read:
             return None
@@ -960,16 +961,12 @@ class ModelAdmin(SqlalchemyCrud, BaseActionAdmin):
             tooltip=_("View"),
             dialog=Dialog(
                 title=_("View") + " - " + _(self.page_schema.label),
-                position="right",
-                showCloseButton=False,
-                overlay=False,
-                closeOnOutside=True,
                 size=SizeEnum.lg,
-                resizable=True,
                 body=await self.get_read_form(request),
             ),
         )
 
+    # zinohome修改部分
     async def get_create_action(self, request: Request, bulk: bool = False) -> Optional[Action]:
         if not bulk:
             return ActionType.Dialog(
@@ -978,12 +975,7 @@ class ModelAdmin(SqlalchemyCrud, BaseActionAdmin):
                 level=LevelEnum.primary,
                 dialog=Dialog(
                     title=_("Create") + " - " + _(self.page_schema.label),
-                    position="right",
-                    showCloseButton=False,
-                    overlay=False,
-                    closeOnOutside=True,
                     size=SizeEnum.lg,
-                    resizable=True,
                     body=await self.get_create_form(request, bulk=bulk),
                 ),
             )
@@ -993,16 +985,12 @@ class ModelAdmin(SqlalchemyCrud, BaseActionAdmin):
             level=LevelEnum.primary,
             dialog=Dialog(
                 title=_("Bulk Create") + " - " + _(self.page_schema.label),
-                position="right",
-                showCloseButton=False,
-                overlay=False,
-                closeOnOutside=True,
                 size=SizeEnum.full,
-                resizable=True,
                 body=await self.get_create_form(request, bulk=bulk),
             ),
         )
 
+    # zinohome修改部分
     async def get_update_action(self, request: Request, bulk: bool = False) -> Optional[Action]:
         if not bulk:
             return ActionType.Dialog(
@@ -1010,12 +998,7 @@ class ModelAdmin(SqlalchemyCrud, BaseActionAdmin):
                 tooltip=_("Update"),
                 dialog=Dialog(
                     title=_("Update") + " - " + _(self.page_schema.label),
-                    position="right",
-                    showCloseButton=False,
-                    overlay=False,
-                    closeOnOutside=True,
                     size=SizeEnum.lg,
-                    resizable=True,
                     body=await self.get_update_form(request, bulk=bulk),
                 ),
             )
@@ -1024,12 +1007,7 @@ class ModelAdmin(SqlalchemyCrud, BaseActionAdmin):
                 label=_("Bulk Update"),
                 dialog=Dialog(
                     title=_("Bulk Update") + " - " + _(self.page_schema.label),
-                    position="right",
-                    showCloseButton=False,
-                    overlay=False,
-                    closeOnOutside=True,
                     size=SizeEnum.lg,
-                    resizable=True,
                     body=await self.get_update_form(request, bulk=True),
                 ),
             )

@@ -2,6 +2,7 @@ from typing import Optional, Type
 
 from fastapi import FastAPI
 from fastapi_amis_admin.admin import AdminSite, PageSchemaAdmin, Settings
+# zinohome修改部分
 from fastapi_amis_admin.amis.components import (
     ActionType,
     App,

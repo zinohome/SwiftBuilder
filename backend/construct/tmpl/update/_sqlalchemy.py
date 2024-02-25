@@ -107,6 +107,7 @@ class SqlalchemySelector(Generic[TableModelT]):
     pk_name: str = "id"  # Primary key name
     parser: TableModelParser = None  # Table model parser
 
+    # zinohome修改部分
     def __init__(self, model: Type[TableModelT] = None, pk_name: str = 'id', fields: List[SqlaField] = None) -> None:
         self.model = model or self.model
         assert self.model, "model is None"
@@ -256,7 +257,7 @@ class SqlalchemyCrud(
     read_fields: List[SqlaPropertyField] = []
     """Model read fields; used in route_read, note the difference between readonly_fields and read_fields.
     default is None, means not use read route."""
-
+    #zinohome修改部分
     def __init__(
         self,
         model: Type[TableModelT],
