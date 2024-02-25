@@ -138,7 +138,7 @@
       "amis_table_column": ""
     },
     {
-      "name": "model_file",
+      "name": "modelfile",
       "optional": false,
       "type": "str",
       "default_factory": null,

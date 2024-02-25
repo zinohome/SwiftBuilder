@@ -27,7 +27,7 @@ class SwiftSQLModel(SQLModel):
 
 class Model(SwiftSQLModel, table=True):
     __tablename__ = 'model'
-    model_id: Optional[int] = models.Field(default=None,
+    modelid: Optional[int] = models.Field(default=None,
                                                     title='ID',
                                                     primary_key=True,
                                                     nullable=False,
@@ -41,7 +41,7 @@ class Model(SwiftSQLModel, table=True):
                                                     index=True,
                                                     amis_form_item = "",
                                                     amis_table_column = "")
-    model_name: str = models.Field(default=None,
+    modelname: str = models.Field(default=None,
                                                     title='模型名称',
                                                     nullable=False,
                                                     index=False,

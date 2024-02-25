@@ -83,7 +83,7 @@ class Schema(SwiftSQLModel, table=True):
                                                     index=False,
                                                     amis_form_item = "",
                                                     amis_table_column = "")
-    model_file: str = models.Field(default=None,
+    modelfile: str = models.Field(default=None,
                                                     title='模型文件',
                                                     nullable=False,
                                                     index=False,

@@ -32,7 +32,7 @@ class ModelAdmin(SwiftAdmin):
     group_schema = "Application"
     page_schema = PageSchema(label='模型管理', page_title='模型管理', icon='fa fa-border-all', sort=95)
     model = Model
-    pk_name = 'model_id'
+    pk_name = 'modelid'
     list_per_page = 10
     list_display = []
     search_fields = []
@@ -163,7 +163,7 @@ class ModelAdmin(SwiftAdmin):
         field_table.headerToolbar = headerToolbar
         field_table.itemActions = None
         # 增加子表外键过滤
-        field_table.api.data['model_id'] = f"${self.pk_name}"
+        field_table.api.data['modelid'] = f"${self.pk_name}"
         #log.debug(table.api)
         field_tabitem = amis.Tabs.Item(title=_('模型字段'), icon='fa fa-square', body=field_table)
         field_tabitem.disabled = False
@@ -200,7 +200,7 @@ class ModelAdmin(SwiftAdmin):
             # 构建子表CRUD - field
             field_table =await self.get_sub_list_table(self.app.get_model_admin('field'), request)
             #增加子表外键过滤
-            field_table.api.data['model_id'] = f"${self.pk_name}"
+            field_table.api.data['modelid'] = f"${self.pk_name}"
             #log.debug(table.api)
             field_tabitem = amis.Tabs.Item(title=_('模型字段'), icon='fa fa-square', body=field_table)
             field_tabitem.disabled = False

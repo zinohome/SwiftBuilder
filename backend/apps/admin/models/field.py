@@ -34,9 +34,9 @@ class Field(SwiftSQLModel, table=True):
                                                     index=False,
                                                     amis_form_item = "",
                                                     amis_table_column = "")
-    model_id: Optional[int] = models.Field(default=None,
+    modelid: Optional[int] = models.Field(default=None,
                                                     title='应用ID',
-                                                    foreign_key='model.model_id',
+                                                    foreign_key='model.modelid',
                                                     nullable=False,
                                                     index=True,
                                                     amis_form_item = "",

@@ -3,7 +3,7 @@
   "tablename": "model",
   "fields": [
     {
-      "name": "model_id",
+      "name": "modelid",
       "optional": true,
       "type": "int",
       "default_factory": null,
@@ -33,7 +33,7 @@
       "amis_table_column": ""
     },
     {
-      "name": "model_name",
+      "name": "modelname",
       "optional": false,
       "type": "str",
       "default_factory": null,

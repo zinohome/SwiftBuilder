@@ -116,7 +116,7 @@
               "sort": 95,
               "model": "Model",
               "model_file": "models/model.json",
-              "pk_name": "model_id",
+              "pk_name": "modelid",
               "list_per_page": 10,
               "list_display": "",
               "search_fields": "",
@@ -128,7 +128,7 @@
               "sub_include": [
                 {
                   "table_name": "field",
-                  "foreign_key_filter": "model_id",
+                  "foreign_key_filter": "modelid",
                   "title": "模型字段",
                   "icon": "fa fa-square"
                 }
