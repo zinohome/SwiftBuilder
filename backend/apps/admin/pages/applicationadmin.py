@@ -243,4 +243,3 @@ class ApplicationAdmin(SwiftAdmin):
             # log.debug(picker)
         '''
         return item
-
