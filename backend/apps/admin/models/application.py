@@ -88,7 +88,7 @@ class Application(SwiftSQLModel, table=True):
                                                     index=False,
                                                     amis_form_item = "",
                                                     amis_table_column = "")
-    site_url: str = models.Field(default=None,
+    site_url: str = models.Field(default="None",
                                                     title='应用地址',
                                                     nullable=True,
                                                     index=False,

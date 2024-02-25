@@ -157,7 +157,7 @@
       "optional": false,
       "type": "str",
       "default_factory": null,
-      "default": "None",
+      "default": "\"None\"",
       "title": "应用地址",
       "primary_key": false,
       "foreign_key": null,
