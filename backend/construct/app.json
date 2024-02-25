@@ -141,7 +141,7 @@
                   "title": "模型字段",
                   "icon": "fa fa-border-all",
                   "sort": 94,
-                  "model": "Model",
+                  "model": "Field",
                   "model_file": "models/field.json",
                   "pk_name": "field_id",
                   "list_per_page": 50,

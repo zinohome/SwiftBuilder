@@ -25,13 +25,13 @@ from starlette.requests import Request
 import simplejson as json
 from fastapi_amis_admin.utils.translation import i18n as _
 from utils.log import log as log
-from apps.admin.models.field import Model
+from apps.admin.models.field import Field
 
 
 class FieldAdmin(SwiftAdmin):
     group_schema = "Application"
     page_schema = PageSchema(label='模型字段', page_title='模型字段', icon='fa fa-border-all', sort=94)
-    model = Model
+    model = Field
     pk_name = 'field_id'
     list_per_page = 50
     list_display = []
