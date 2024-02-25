@@ -7,9 +7,10 @@
 #  @Author  : Zhang Jun
 #  @Email   : ibmzhangjun@139.com
 #  @Software: SwiftApp
-from fastapi._compat import ModelField
 from fastapi_amis_admin.admin import AdminAction
-from fastapi_amis_admin.crud import CrudEnum
+from fastapi_amis_admin.crud import BaseApiOut, ItemListSchema, CrudEnum
+from fastapi_amis_admin.utils.pydantic import ModelField
+from fastapi_amis_admin.amis import SchemaNode
 from fastapi_amis_admin.crud.base import SchemaFilterT
 from fastapi_amis_admin.crud.parser import TableModelParser
 from fastapi_amis_admin.utils.pydantic import model_fields
@@ -113,6 +114,27 @@ class ModelAdmin(SwiftAdmin):
         table.api.data['contract_id'] = f"${self.pk_name}"
         p_form.body.append(table)
         return p_form
+
+    async def get_form_item(
+        self, request: Request, modelfield: ModelField, action: CrudEnum
+    ) -> Union[FormItem, SchemaNode, None]:
+        item = await super().get_form_item(request, modelfield, action)
+        if item.name.strip() == 'applicaiton_id':
+            picker = item.schemaApi.responseData['controls'][0]
+            picker.labelField = 'appname'
+            picker.valueField = 'applicaiton_id'
+            log.debug("name='%s'" % picker.name)
+            log.debug("label='%s'" % picker.label)
+            log.debug("labelField='%s'" % picker.labelField)
+            log.debug("valueField='%s'" % picker.valueField)
+            log.debug("multiple='%s'" % picker.multiple)
+            log.debug("required='%s'" % picker.required)
+            log.debug("modalMode='%s'" % picker.modalMode)
+            log.debug("size='%s'" % picker.size)
+            log.debug("pickerSchema='%s'" % picker.pickerSchema)
+            log.debug("source='%s'" % picker.source)
+            #log.debug(picker)
+        return item
 
     async def get_read_form(self, request: Request) -> Form:
         r_form = await super().get_read_form(request)

@@ -52,7 +52,10 @@ from fastapi_amis_admin.crud import BaseApiOut, ItemListSchema
 from fastapi_amis_admin.crud.base import SchemaCreateT, SchemaUpdateT
 from fastapi_amis_admin.crud.parser import parse_obj_to_schema, TableModelT
 from fastapi_user_auth.mixins.admin import AuthFieldModelAdmin, AuthSelectModelAdmin
-from sqlalchemy import func, Select
+from sqlalchemy import func
+from fastapi_amis_admin.utils.pydantic import ModelField
+from fastapi_amis_admin.amis import SchemaNode
+from fastapi_amis_admin.crud import BaseApiOut, ItemListSchema, CrudEnum
 from typing_extensions import Annotated, Literal
 from fastapi_amis_admin.utils.translation import i18n as _
 from utils.log import log as log
@@ -212,6 +215,29 @@ class SwiftAdmin(AuthSelectModelAdmin):
     async def get_update_form(self, request: Request, bulk: bool = False) -> Form:
         u_form = await super().get_update_form(request, bulk)
         return u_form
+
+    async def get_form_item(
+        self, request: Request, modelfield: ModelField, action: CrudEnum
+    ) -> Union[FormItem, SchemaNode, None]:
+        item = await super().get_form_item(request, modelfield, action)
+        '''
+        if item.name.strip() == 'applicaiton_id':
+            picker = item.schemaApi.responseData['controls'][0]
+            picker.labelField = 'appname'
+            picker.valueField = 'applicaiton_id'
+            log.debug("name='%s'" % picker.name)
+            log.debug("label='%s'" % picker.label)
+            log.debug("labelField='%s'" % picker.labelField)
+            log.debug("valueField='%s'" % picker.valueField)
+            log.debug("multiple='%s'" % picker.multiple)
+            log.debug("required='%s'" % picker.required)
+            log.debug("modalMode='%s'" % picker.modalMode)
+            log.debug("size='%s'" % picker.size)
+            log.debug("pickerSchema='%s'" % picker.pickerSchema)
+            log.debug("source='%s'" % picker.source)
+            #log.debug(picker)
+        '''
+        return item
 
     async def get_read_action(self, request: Request) -> Optional[Action]:
         if not self.schema_read:
