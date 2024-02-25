@@ -33,7 +33,7 @@ class ModelAdmin(SwiftAdmin):
     page_schema = PageSchema(label='模型管理', page_title='模型管理', icon='fa fa-border-all', sort=95)
     model = Model
     pk_name = 'model_id'
-    list_per_page = 50
+    list_per_page = 10
     list_display = []
     search_fields = []
     parent_class = None
@@ -154,6 +154,20 @@ class ModelAdmin(SwiftAdmin):
                 fieldlist.append(item)
         basictabitem = amis.Tabs.Item(title=_('基本信息'), icon='fa fa-square', body=fieldlist)
         formtab.tabs.append(basictabitem)
+        # 构建子表CRUD - field
+        field_table =await self.get_sub_list_table(self.app.get_model_admin('field'), request)
+        headerToolbar = [
+            {"type": "columns-toggler", "align": "left", "draggable": False},
+            {"type": "reload", "align": "right"}
+        ]
+        field_table.headerToolbar = headerToolbar
+        field_table.itemActions = None
+        # 增加子表外键过滤
+        field_table.api.data['model_id'] = f"${self.pk_name}"
+        #log.debug(table.api)
+        field_tabitem = amis.Tabs.Item(title=_('模型字段'), icon='fa fa-square', body=field_table)
+        field_tabitem.disabled = False
+        formtab.tabs.append(field_tabitem)
         r_form.body = formtab
         return r_form
 
@@ -183,5 +197,13 @@ class ModelAdmin(SwiftAdmin):
                 fieldlist.append(item)
             basictabitem = amis.Tabs.Item(title=_('基本信息'), icon='fa fa-square', body=fieldlist)
             formtab.tabs.append(basictabitem)
+            # 构建子表CRUD - field
+            field_table =await self.get_sub_list_table(self.app.get_model_admin('field'), request)
+            #增加子表外键过滤
+            field_table.api.data['model_id'] = f"${self.pk_name}"
+            #log.debug(table.api)
+            field_tabitem = amis.Tabs.Item(title=_('模型字段'), icon='fa fa-square', body=field_table)
+            field_tabitem.disabled = False
+            formtab.tabs.append(field_tabitem)
             u_form.body = formtab
         return u_form

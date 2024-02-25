@@ -18,6 +18,7 @@ from apps.admin.pages.applicationadmin import ApplicationAdmin
 from apps.admin.pages.schemagroupadmin import SchemagroupAdmin
 from apps.admin.pages.schemaadmin import SchemaAdmin
 from apps.admin.pages.modeladmin import ModelAdmin
+from apps.admin.pages.fieldadmin import FieldAdmin
 
 appdef = App()
 
@@ -34,6 +35,7 @@ class ApplicaionGroup(admin.AdminApp):
         self.register_admin(SchemagroupAdmin)
         self.register_admin(SchemaAdmin)
         self.register_admin(ModelAdmin)
+        self.register_admin(FieldAdmin)
         #contractdetailAdmin_crud = ContractdetailAdmin(self.app).register_crud()
         #self.router.include_router(contractdetailAdmin_crud.router)
 

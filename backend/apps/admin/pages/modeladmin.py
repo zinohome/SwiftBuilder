@@ -25,17 +25,17 @@ from starlette.requests import Request
 import simplejson as json
 from fastapi_amis_admin.utils.translation import i18n as _
 from utils.log import log as log
-from apps.admin.models.contractdetail import Contractdetail
+from apps.admin.models.model import Model
 
 
-class ContractdetailAdmin(SwiftAdmin):
-    group_schema = "Contract"
-    page_schema = PageSchema(label='合同明细', page_title='合同明细', icon='fa fa-border-all', sort=97)
-    model = Contractdetail
-    pk_name = 'contractdetail_id'
-    list_per_page = 50
-    list_display = [Contractdetail.contract_id, Contractdetail.item_number, Contractdetail.item_name, Contractdetail.item_spec, Contractdetail.item_quantity, Contractdetail.unit_price, Contractdetail.item_mount]
-    search_fields = [Contractdetail.contract_id, Contractdetail.item_number, Contractdetail.item_name, Contractdetail.item_spec, Contractdetail.item_quantity, Contractdetail.unit_price, Contractdetail.item_mount]
+class ModelAdmin(SwiftAdmin):
+    group_schema = "Application"
+    page_schema = PageSchema(label='模型管理', page_title='模型管理', icon='fa fa-border-all', sort=95)
+    model = Model
+    pk_name = 'model_id'
+    list_per_page = 10
+    list_display = []
+    search_fields = []
     parent_class = None
     tabsMode = TabsModeEnum.card
 
@@ -154,6 +154,20 @@ class ContractdetailAdmin(SwiftAdmin):
                 fieldlist.append(item)
         basictabitem = amis.Tabs.Item(title=_('基本信息'), icon='fa fa-square', body=fieldlist)
         formtab.tabs.append(basictabitem)
+        # 构建子表CRUD - field
+        field_table =await self.get_sub_list_table(self.app.get_model_admin('field'), request)
+        headerToolbar = [
+            {"type": "columns-toggler", "align": "left", "draggable": False},
+            {"type": "reload", "align": "right"}
+        ]
+        field_table.headerToolbar = headerToolbar
+        field_table.itemActions = None
+        # 增加子表外键过滤
+        field_table.api.data['model_id'] = f"${self.pk_name}"
+        #log.debug(table.api)
+        field_tabitem = amis.Tabs.Item(title=_('模型字段'), icon='fa fa-square', body=field_table)
+        field_tabitem.disabled = False
+        formtab.tabs.append(field_tabitem)
         r_form.body = formtab
         return r_form
 
@@ -183,5 +197,13 @@ class ContractdetailAdmin(SwiftAdmin):
                 fieldlist.append(item)
             basictabitem = amis.Tabs.Item(title=_('基本信息'), icon='fa fa-square', body=fieldlist)
             formtab.tabs.append(basictabitem)
+            # 构建子表CRUD - field
+            field_table =await self.get_sub_list_table(self.app.get_model_admin('field'), request)
+            #增加子表外键过滤
+            field_table.api.data['model_id'] = f"${self.pk_name}"
+            #log.debug(table.api)
+            field_tabitem = amis.Tabs.Item(title=_('模型字段'), icon='fa fa-square', body=field_table)
+            field_tabitem.disabled = False
+            formtab.tabs.append(field_tabitem)
             u_form.body = formtab
         return u_form

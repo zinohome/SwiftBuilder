@@ -25,35 +25,26 @@ from starlette.requests import Request
 import simplejson as json
 from fastapi_amis_admin.utils.translation import i18n as _
 from utils.log import log as log
-from apps.admin.models.contract import Contract
+from apps.admin.models.schema import Schema
 
 
-class ContractAdmin(SwiftAdmin):
-    group_schema = "Contract"
-    page_schema = PageSchema(label='合同管理', page_title='合同管理', icon='fa fa-bolt', sort=98)
-    model = Contract
-    pk_name = 'contract_id'
-    list_per_page = 10
-    list_display = [Contract.contract_id, Contract.contact_number, Contract.contact_type, Contract.customer_name, Contract.supplier_name, Contract.sign_date, Contract.sign_address, Contract.delivery_data]
-    search_fields = [Contract.contract_id, Contract.contact_number, Contract.contact_type, Contract.customer_name, Contract.supplier_name, Contract.sign_date, Contract.sign_address, Contract.delivery_data]
+class SchemaAdmin(SwiftAdmin):
+    group_schema = "Application"
+    page_schema = PageSchema(label='导 航 项', page_title='导 航 项', icon='fa fa-border-all', sort=96)
+    model = Schema
+    pk_name = 'schema_id'
+    list_per_page = 50
+    list_display = []
+    search_fields = []
     parent_class = None
     tabsMode = TabsModeEnum.card
-    admin_action_maker = [
-        lambda self: AdminAction(
-            admin=self,
-            name="print",
-            label=_("Print"),
-            flags=["item"],
-            getter=lambda request: self.get_print_action(request),
-        )
-    ]
 
     def __init__(self, app: "AdminApp"):
         super().__init__(app)
         # 启用批量新增
         self.enable_bulk_create = False
         # 启用查看
-        self.schema_read = self.schema_model
+        self.schema_read = None
         # 设置form弹出类型  Drawer | Dialog
         self.action_type = 'Drawer'
 
@@ -163,20 +154,6 @@ class ContractAdmin(SwiftAdmin):
                 fieldlist.append(item)
         basictabitem = amis.Tabs.Item(title=_('基本信息'), icon='fa fa-square', body=fieldlist)
         formtab.tabs.append(basictabitem)
-        # 构建子表CRUD - contractdetail
-        contractdetail_table =await self.get_sub_list_table(self.app.get_model_admin('contractdetail'), request)
-        headerToolbar = [
-            {"type": "columns-toggler", "align": "left", "draggable": False},
-            {"type": "reload", "align": "right"}
-        ]
-        contractdetail_table.headerToolbar = headerToolbar
-        contractdetail_table.itemActions = None
-        # 增加子表外键过滤
-        contractdetail_table.api.data['contract_id'] = f"${self.pk_name}"
-        #log.debug(table.api)
-        contractdetail_tabitem = amis.Tabs.Item(title=_('合同明细'), icon='fa fa-square', body=contractdetail_table)
-        contractdetail_tabitem.disabled = False
-        formtab.tabs.append(contractdetail_tabitem)
         r_form.body = formtab
         return r_form
 
@@ -206,13 +183,5 @@ class ContractAdmin(SwiftAdmin):
                 fieldlist.append(item)
             basictabitem = amis.Tabs.Item(title=_('基本信息'), icon='fa fa-square', body=fieldlist)
             formtab.tabs.append(basictabitem)
-            # 构建子表CRUD - contractdetail
-            contractdetail_table =await self.get_sub_list_table(self.app.get_model_admin('contractdetail'), request)
-            #增加子表外键过滤
-            contractdetail_table.api.data['contract_id'] = f"${self.pk_name}"
-            #log.debug(table.api)
-            contractdetail_tabitem = amis.Tabs.Item(title=_('合同明细'), icon='fa fa-square', body=contractdetail_table)
-            contractdetail_tabitem.disabled = False
-            formtab.tabs.append(contractdetail_tabitem)
             u_form.body = formtab
         return u_form

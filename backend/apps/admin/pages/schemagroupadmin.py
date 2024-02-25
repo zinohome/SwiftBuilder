@@ -25,15 +25,15 @@ from starlette.requests import Request
 import simplejson as json
 from fastapi_amis_admin.utils.translation import i18n as _
 from utils.log import log as log
-from apps.admin.models.application import Application
+from apps.admin.models.schemagroup import Schemagroup
 
 
-class ApplicationAdmin(SwiftAdmin):
+class SchemagroupAdmin(SwiftAdmin):
     group_schema = "Application"
-    page_schema = PageSchema(label='应用管理', page_title='应用管理', icon='fa fa-bolt', sort=98)
-    model = Application
-    pk_name = 'applicaiton_id'
-    list_per_page = 10
+    page_schema = PageSchema(label='导 航 组', page_title='导 航 组', icon='fa fa-border-all', sort=97)
+    model = Schemagroup
+    pk_name = 'schemagroup_id'
+    list_per_page = 50
     list_display = []
     search_fields = []
     parent_class = None
@@ -154,34 +154,6 @@ class ApplicationAdmin(SwiftAdmin):
                 fieldlist.append(item)
         basictabitem = amis.Tabs.Item(title=_('基本信息'), icon='fa fa-square', body=fieldlist)
         formtab.tabs.append(basictabitem)
-        # 构建子表CRUD - schemagroup
-        schemagroup_table =await self.get_sub_list_table(self.app.get_model_admin('schemagroup'), request)
-        headerToolbar = [
-            {"type": "columns-toggler", "align": "left", "draggable": False},
-            {"type": "reload", "align": "right"}
-        ]
-        schemagroup_table.headerToolbar = headerToolbar
-        schemagroup_table.itemActions = None
-        # 增加子表外键过滤
-        schemagroup_table.api.data['applicaiton_id'] = f"${self.pk_name}"
-        #log.debug(table.api)
-        schemagroup_tabitem = amis.Tabs.Item(title=_('导 航 组'), icon='fa fa-square', body=schemagroup_table)
-        schemagroup_tabitem.disabled = False
-        formtab.tabs.append(schemagroup_tabitem)
-        # 构建子表CRUD - schema
-        schema_table =await self.get_sub_list_table(self.app.get_model_admin('schema'), request)
-        headerToolbar = [
-            {"type": "columns-toggler", "align": "left", "draggable": False},
-            {"type": "reload", "align": "right"}
-        ]
-        schema_table.headerToolbar = headerToolbar
-        schema_table.itemActions = None
-        # 增加子表外键过滤
-        schema_table.api.data['applicaiton_id'] = f"${self.pk_name}"
-        #log.debug(table.api)
-        schema_tabitem = amis.Tabs.Item(title=_('导 航 项'), icon='fa fa-square', body=schema_table)
-        schema_tabitem.disabled = False
-        formtab.tabs.append(schema_tabitem)
         r_form.body = formtab
         return r_form
 
@@ -211,21 +183,5 @@ class ApplicationAdmin(SwiftAdmin):
                 fieldlist.append(item)
             basictabitem = amis.Tabs.Item(title=_('基本信息'), icon='fa fa-square', body=fieldlist)
             formtab.tabs.append(basictabitem)
-            # 构建子表CRUD - schemagroup
-            schemagroup_table =await self.get_sub_list_table(self.app.get_model_admin('schemagroup'), request)
-            #增加子表外键过滤
-            schemagroup_table.api.data['applicaiton_id'] = f"${self.pk_name}"
-            #log.debug(table.api)
-            schemagroup_tabitem = amis.Tabs.Item(title=_('导 航 组'), icon='fa fa-square', body=schemagroup_table)
-            schemagroup_tabitem.disabled = False
-            formtab.tabs.append(schemagroup_tabitem)
-            # 构建子表CRUD - schema
-            schema_table =await self.get_sub_list_table(self.app.get_model_admin('schema'), request)
-            #增加子表外键过滤
-            schema_table.api.data['applicaiton_id'] = f"${self.pk_name}"
-            #log.debug(table.api)
-            schema_tabitem = amis.Tabs.Item(title=_('导 航 项'), icon='fa fa-square', body=schema_table)
-            schema_tabitem.disabled = False
-            formtab.tabs.append(schema_tabitem)
             u_form.body = formtab
         return u_form
