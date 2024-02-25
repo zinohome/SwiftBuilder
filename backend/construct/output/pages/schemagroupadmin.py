@@ -185,3 +185,27 @@ class SchemagroupAdmin(SwiftAdmin):
             formtab.tabs.append(basictabitem)
             u_form.body = formtab
         return u_form
+
+
+    async def get_form_item(
+            self, request: Request, modelfield: ModelField, action: CrudEnum
+    ) -> Union[FormItem, SchemaNode, None]:
+        item = await super().get_form_item(request, modelfield, action)
+        '''
+        if item.name.strip() == 'applicaiton_id':
+            picker = item.schemaApi.responseData['controls'][0]
+            picker.labelField = 'appname'
+            picker.valueField = 'applicaiton_id'
+            log.debug("name='%s'" % picker.name)
+            log.debug("label='%s'" % picker.label)
+            log.debug("labelField='%s'" % picker.labelField)
+            log.debug("valueField='%s'" % picker.valueField)
+            log.debug("multiple='%s'" % picker.multiple)
+            log.debug("required='%s'" % picker.required)
+            log.debug("modalMode='%s'" % picker.modalMode)
+            log.debug("size='%s'" % picker.size)
+            log.debug("pickerSchema='%s'" % picker.pickerSchema)
+            log.debug("source='%s'" % picker.source)
+            # log.debug(picker)
+        '''
+        return item
