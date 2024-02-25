@@ -191,11 +191,9 @@ class FieldAdmin(SwiftAdmin):
             self, request: Request, modelfield: ModelField, action: CrudEnum
     ) -> Union[FormItem, SchemaNode, None]:
         item = await super().get_form_item(request, modelfield, action)
-        '''
-        if item.name.strip() == 'applicaiton_id':
+        if item.name.strip() == 'modelid':
             picker = item.schemaApi.responseData['controls'][0]
-            picker.labelField = 'appname'
-            picker.valueField = 'applicaiton_id'
+            picker.labelField = 'modelname'
+            picker.valueField = 'modelid'
             # log.debug(picker)
-        '''
         return item

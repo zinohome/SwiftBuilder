@@ -59,7 +59,7 @@ class {{ name|trim|capitalize}}Admin(SwiftAdmin):
         # 启用批量新增
         self.enable_bulk_create = {{ enable_bulk_create }}
         # 启用查看
-{% if print == True %}
+{% if schema_read == True %}
         self.schema_read = self.schema_model
 {% else %}
         self.schema_read = None
@@ -236,12 +236,12 @@ class {{ name|trim|capitalize}}Admin(SwiftAdmin):
             self, request: Request, modelfield: ModelField, action: CrudEnum
     ) -> Union[FormItem, SchemaNode, None]:
         item = await super().get_form_item(request, modelfield, action)
-        '''
-        if item.name.strip() == 'applicaiton_id':
+{% for sel in foreign_keys_select %}
+        if item.name.strip() == '{{ sel.foreignkeyfield_name }}':
             picker = item.schemaApi.responseData['controls'][0]
-            picker.labelField = 'appname'
-            picker.valueField = 'applicaiton_id'
+            picker.labelField = '{{ sel.labelfield }}'
+            picker.valueField = '{{ sel.valuefield }}'
             # log.debug(picker)
-        '''
+{% endfor %}
         return item
 

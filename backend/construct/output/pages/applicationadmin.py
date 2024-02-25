@@ -34,8 +34,8 @@ class ApplicationAdmin(SwiftAdmin):
     model = Application
     pk_name = 'applicaiton_id'
     list_per_page = 10
-    list_display = [Application.applicaiton_id, Application.appname, Application.apptitle, Application.description, Application.version, Application.author, Application.create_time, Application.update_time]
-    search_fields = [Application.applicaiton_id, Application.appname, Application.apptitle, Application.description, Application.version, Application.author]
+    list_display = [Application.appname, Application.apptitle, Application.description, Application.version, Application.author, Application.create_time, Application.update_time]
+    search_fields = [Application.appname, Application.apptitle, Application.description, Application.version, Application.author]
     parent_class = None
     tabsMode = TabsModeEnum.card
 
@@ -44,7 +44,7 @@ class ApplicationAdmin(SwiftAdmin):
         # 启用批量新增
         self.enable_bulk_create = False
         # 启用查看
-        self.schema_read = None
+        self.schema_read = self.schema_model
         # 设置form弹出类型  Drawer | Dialog
         self.action_type = 'Drawer'
 
@@ -235,11 +235,4 @@ class ApplicationAdmin(SwiftAdmin):
             self, request: Request, modelfield: ModelField, action: CrudEnum
     ) -> Union[FormItem, SchemaNode, None]:
         item = await super().get_form_item(request, modelfield, action)
-        '''
-        if item.name.strip() == 'applicaiton_id':
-            picker = item.schemaApi.responseData['controls'][0]
-            picker.labelField = 'appname'
-            picker.valueField = 'applicaiton_id'
-            # log.debug(picker)
-        '''
         return item

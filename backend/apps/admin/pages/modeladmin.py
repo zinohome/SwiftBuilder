@@ -213,7 +213,7 @@ class ModelAdmin(SwiftAdmin):
             self, request: Request, modelfield: ModelField, action: CrudEnum
     ) -> Union[FormItem, SchemaNode, None]:
         item = await super().get_form_item(request, modelfield, action)
-        if item.name.strip() == 'applicaiton_id':
+        if item.name.strip() == 'application_id':
             picker = item.schemaApi.responseData['controls'][0]
             picker.labelField = 'appname'
             picker.valueField = 'applicaiton_id'

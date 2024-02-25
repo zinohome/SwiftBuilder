@@ -43,13 +43,14 @@
           "model_file": "models/application.json",
           "pk_name": "applicaiton_id",
           "list_per_page": 10,
-          "list_display": "Application.applicaiton_id, Application.appname, Application.apptitle, Application.description, Application.version, Application.author, Application.create_time, Application.update_time",
-          "search_fields": "Application.applicaiton_id, Application.appname, Application.apptitle, Application.description, Application.version, Application.author",
+          "list_display": "Application.appname, Application.apptitle, Application.description, Application.version, Application.author, Application.create_time, Application.update_time",
+          "search_fields": "Application.appname, Application.apptitle, Application.description, Application.version, Application.author",
           "parent_class": "None",
           "print": false,
           "enable_bulk_create": false,
           "schema_read": true,
           "action_type": "Drawer",
+          "foreign_keys_select": [],
           "sub_include": [
             {
               "table_name": "schemagroup",
@@ -83,6 +84,13 @@
               "enable_bulk_create": false,
               "schema_read": false,
               "action_type": "Drawer",
+              "foreign_keys_select": [
+                {
+                  "foreignkeyfield_name": "application_id",
+                  "valuefield": "applicaiton_id",
+                  "labelfield": "appname"
+                }
+              ],
               "sub_include": []
             },
             {
@@ -103,6 +111,13 @@
               "enable_bulk_create": false,
               "schema_read": false,
               "action_type": "Drawer",
+              "foreign_keys_select": [
+                {
+                  "foreignkeyfield_name": "application_id",
+                  "valuefield": "applicaiton_id",
+                  "labelfield": "appname"
+                }
+              ],
               "sub_include": []
             }
           ]
@@ -125,6 +140,13 @@
               "enable_bulk_create": false,
               "schema_read": false,
               "action_type": "Drawer",
+              "foreign_keys_select": [
+                {
+                  "foreignkeyfield_name": "application_id",
+                  "valuefield": "applicaiton_id",
+                  "labelfield": "appname"
+                }
+              ],
               "sub_include": [
                 {
                   "table_name": "field",
@@ -152,6 +174,13 @@
                   "enable_bulk_create": false,
                   "schema_read": false,
                   "action_type": "Drawer",
+                  "foreign_keys_select": [
+                    {
+                      "foreignkeyfield_name": "modelid",
+                      "valuefield": "modelid",
+                      "labelfield": "modelname"
+                    }
+                  ],
                   "sub_include": []
                 }
               ]
