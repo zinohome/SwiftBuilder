@@ -34,8 +34,8 @@ class ApplicationAdmin(SwiftAdmin):
     model = Application
     pk_name = 'applicaiton_id'
     list_per_page = 10
-    list_display = []
-    search_fields = []
+    list_display = [Application.applicaiton_id, Application.appname, Application.apptitle, Application.description, Application.version, Application.author, Application.create_time, Application.update_time]
+    search_fields = [Application.applicaiton_id, Application.appname, Application.apptitle, Application.description, Application.version, Application.author]
     parent_class = None
     tabsMode = TabsModeEnum.card
 
