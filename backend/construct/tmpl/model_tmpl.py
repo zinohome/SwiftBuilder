@@ -22,13 +22,13 @@ from core import i18n as _
 class SwiftSQLModel(SQLModel):
     class Config:
         use_enum_values = True
-        orm_mode = True
+        from_attributes = True
         arbitrary_types_allowed = True
 
 class {{ model_name|trim|capitalize }}(SwiftSQLModel, table=True):
     __tablename__ = '{{ tablename }}'
 {% for field in fields %}
-    {{ field.name }}: {% if field.optional %}Optional[{% endif %}{{ field.type }}{% if field.optional %}]{% endif %} = models.Field({% if field.default_factory != None %}default_factory= {{ field.default_factory }}{% else %}default=None{% endif %},
+    {{ field.name }}: {% if field.optional %}Optional[{% endif %}{{ field.type }}{% if field.optional %}]{% endif %} = models.Field({% if field.default_factory != None %}default_factory= {{ field.default_factory }}{% else %}default={{ field.default }}{% endif %},
                                                     title='{{ field.title }}',
                                                     {% if field.primary_key == True %}
                                                     primary_key={{ field.primary_key }},
