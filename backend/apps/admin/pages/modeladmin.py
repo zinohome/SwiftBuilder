@@ -7,10 +7,9 @@
 #  @Author  : Zhang Jun
 #  @Email   : ibmzhangjun@139.com
 #  @Software: SwiftApp
+from fastapi._compat import ModelField
 from fastapi_amis_admin.admin import AdminAction
-from fastapi_amis_admin.crud import BaseApiOut, ItemListSchema, CrudEnum
-from fastapi_amis_admin.utils.pydantic import ModelField
-from fastapi_amis_admin.amis import SchemaNode
+from fastapi_amis_admin.crud import CrudEnum
 from fastapi_amis_admin.crud.base import SchemaFilterT
 from fastapi_amis_admin.crud.parser import TableModelParser
 from fastapi_amis_admin.utils.pydantic import model_fields
@@ -33,7 +32,7 @@ class ModelAdmin(SwiftAdmin):
     group_schema = "Application"
     page_schema = PageSchema(label='模型管理', page_title='模型管理', icon='fa fa-border-all', sort=95)
     model = Model
-    pk_name = 'model_id'
+    pk_name = 'modelid'
     list_per_page = 10
     list_display = []
     search_fields = []
@@ -115,27 +114,6 @@ class ModelAdmin(SwiftAdmin):
         p_form.body.append(table)
         return p_form
 
-    async def get_form_item(
-        self, request: Request, modelfield: ModelField, action: CrudEnum
-    ) -> Union[FormItem, SchemaNode, None]:
-        item = await super().get_form_item(request, modelfield, action)
-        if item.name.strip() == 'applicaiton_id':
-            picker = item.schemaApi.responseData['controls'][0]
-            picker.labelField = 'appname'
-            picker.valueField = 'applicaiton_id'
-            log.debug("name='%s'" % picker.name)
-            log.debug("label='%s'" % picker.label)
-            log.debug("labelField='%s'" % picker.labelField)
-            log.debug("valueField='%s'" % picker.valueField)
-            log.debug("multiple='%s'" % picker.multiple)
-            log.debug("required='%s'" % picker.required)
-            log.debug("modalMode='%s'" % picker.modalMode)
-            log.debug("size='%s'" % picker.size)
-            log.debug("pickerSchema='%s'" % picker.pickerSchema)
-            log.debug("source='%s'" % picker.source)
-            #log.debug(picker)
-        return item
-
     async def get_read_form(self, request: Request) -> Form:
         r_form = await super().get_read_form(request)
         # 构建主表Read
@@ -185,7 +163,7 @@ class ModelAdmin(SwiftAdmin):
         field_table.headerToolbar = headerToolbar
         field_table.itemActions = None
         # 增加子表外键过滤
-        field_table.api.data['model_id'] = f"${self.pk_name}"
+        field_table.api.data['modelid'] = f"${self.pk_name}"
         #log.debug(table.api)
         field_tabitem = amis.Tabs.Item(title=_('模型字段'), icon='fa fa-square', body=field_table)
         field_tabitem.disabled = False
@@ -222,10 +200,24 @@ class ModelAdmin(SwiftAdmin):
             # 构建子表CRUD - field
             field_table =await self.get_sub_list_table(self.app.get_model_admin('field'), request)
             #增加子表外键过滤
-            field_table.api.data['model_id'] = f"${self.pk_name}"
+            field_table.api.data['modelid'] = f"${self.pk_name}"
             #log.debug(table.api)
             field_tabitem = amis.Tabs.Item(title=_('模型字段'), icon='fa fa-square', body=field_table)
             field_tabitem.disabled = False
             formtab.tabs.append(field_tabitem)
             u_form.body = formtab
         return u_form
+
+
+    async def get_form_item(
+            self, request: Request, modelfield: ModelField, action: CrudEnum
+    ) -> Union[FormItem, SchemaNode, None]:
+        item = await super().get_form_item(request, modelfield, action)
+        '''
+        if item.name.strip() == 'applicaiton_id':
+            picker = item.schemaApi.responseData['controls'][0]
+            picker.labelField = 'appname'
+            picker.valueField = 'applicaiton_id'
+            # log.debug(picker)
+        '''
+        return item

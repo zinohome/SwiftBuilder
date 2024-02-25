@@ -225,16 +225,6 @@ class SwiftAdmin(AuthSelectModelAdmin):
             picker = item.schemaApi.responseData['controls'][0]
             picker.labelField = 'appname'
             picker.valueField = 'applicaiton_id'
-            log.debug("name='%s'" % picker.name)
-            log.debug("label='%s'" % picker.label)
-            log.debug("labelField='%s'" % picker.labelField)
-            log.debug("valueField='%s'" % picker.valueField)
-            log.debug("multiple='%s'" % picker.multiple)
-            log.debug("required='%s'" % picker.required)
-            log.debug("modalMode='%s'" % picker.modalMode)
-            log.debug("size='%s'" % picker.size)
-            log.debug("pickerSchema='%s'" % picker.pickerSchema)
-            log.debug("source='%s'" % picker.source)
             #log.debug(picker)
         '''
         return item
