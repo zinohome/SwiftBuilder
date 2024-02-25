@@ -34,9 +34,9 @@ class Schema(SwiftSQLModel, table=True):
                                                     index=False,
                                                     amis_form_item = "",
                                                     amis_table_column = "")
-    applicaiton_id: Optional[int] = models.Field(default=None,
+    application_id: Optional[int] = models.Field(default=None,
                                                     title='应用ID',
-                                                    foreign_key='application.applicaiton_id',
+                                                    foreign_key='application.application_id',
                                                     nullable=False,
                                                     index=True,
                                                     amis_form_item = "",

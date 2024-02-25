@@ -216,6 +216,6 @@ class ModelAdmin(SwiftAdmin):
         if item.name.strip() == 'application_id':
             picker = item.schemaApi.responseData['controls'][0]
             picker.labelField = 'appname'
-            picker.valueField = 'applicaiton_id'
+            picker.valueField = 'application_id'
             # log.debug(picker)
         return item

@@ -27,7 +27,7 @@ class SwiftSQLModel(SQLModel):
 
 class Application(SwiftSQLModel, table=True):
     __tablename__ = 'application'
-    applicaiton_id: Optional[int] = models.Field(default=None,
+    application_id: Optional[int] = models.Field(default=None,
                                                     title='ID',
                                                     primary_key=True,
                                                     nullable=False,

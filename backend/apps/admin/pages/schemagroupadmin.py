@@ -34,8 +34,8 @@ class SchemagroupAdmin(SwiftAdmin):
     model = Schemagroup
     pk_name = 'schemagroup_id'
     list_per_page = 50
-    list_display = []
-    search_fields = []
+    list_display = [Schemagroup.group_name, Schemagroup.label, Schemagroup.title, Schemagroup.icon, Schemagroup.sort, Schemagroup.router_prefix]
+    search_fields = [Schemagroup.group_name, Schemagroup.label, Schemagroup.title, Schemagroup.icon, Schemagroup.sort, Schemagroup.router_prefix]
     parent_class = None
     tabsMode = TabsModeEnum.card
 
@@ -44,7 +44,7 @@ class SchemagroupAdmin(SwiftAdmin):
         # 启用批量新增
         self.enable_bulk_create = False
         # 启用查看
-        self.schema_read = None
+        self.schema_read = self.schema_model
         # 设置form弹出类型  Drawer | Dialog
         self.action_type = 'Drawer'
 
@@ -194,6 +194,6 @@ class SchemagroupAdmin(SwiftAdmin):
         if item.name.strip() == 'application_id':
             picker = item.schemaApi.responseData['controls'][0]
             picker.labelField = 'appname'
-            picker.valueField = 'applicaiton_id'
+            picker.valueField = 'application_id'
             # log.debug(picker)
         return item

@@ -32,7 +32,7 @@ class ApplicationAdmin(SwiftAdmin):
     group_schema = "Application"
     page_schema = PageSchema(label='应用管理', page_title='应用管理', icon='fa fa-bolt', sort=98)
     model = Application
-    pk_name = 'applicaiton_id'
+    pk_name = 'application_id'
     list_per_page = 10
     list_display = [Application.appname, Application.apptitle, Application.description, Application.version, Application.author, Application.create_time, Application.update_time]
     search_fields = [Application.appname, Application.apptitle, Application.description, Application.version, Application.author]
@@ -163,7 +163,7 @@ class ApplicationAdmin(SwiftAdmin):
         schemagroup_table.headerToolbar = headerToolbar
         schemagroup_table.itemActions = None
         # 增加子表外键过滤
-        schemagroup_table.api.data['applicaiton_id'] = f"${self.pk_name}"
+        schemagroup_table.api.data['application_id'] = f"${self.pk_name}"
         #log.debug(table.api)
         schemagroup_tabitem = amis.Tabs.Item(title=_('导 航 组'), icon='fa fa-square', body=schemagroup_table)
         schemagroup_tabitem.disabled = False
@@ -177,7 +177,7 @@ class ApplicationAdmin(SwiftAdmin):
         schema_table.headerToolbar = headerToolbar
         schema_table.itemActions = None
         # 增加子表外键过滤
-        schema_table.api.data['applicaiton_id'] = f"${self.pk_name}"
+        schema_table.api.data['application_id'] = f"${self.pk_name}"
         #log.debug(table.api)
         schema_tabitem = amis.Tabs.Item(title=_('导 航 项'), icon='fa fa-square', body=schema_table)
         schema_tabitem.disabled = False
@@ -214,7 +214,7 @@ class ApplicationAdmin(SwiftAdmin):
             # 构建子表CRUD - schemagroup
             schemagroup_table =await self.get_sub_list_table(self.app.get_model_admin('schemagroup'), request)
             #增加子表外键过滤
-            schemagroup_table.api.data['applicaiton_id'] = f"${self.pk_name}"
+            schemagroup_table.api.data['application_id'] = f"${self.pk_name}"
             #log.debug(table.api)
             schemagroup_tabitem = amis.Tabs.Item(title=_('导 航 组'), icon='fa fa-square', body=schemagroup_table)
             schemagroup_tabitem.disabled = False
@@ -222,7 +222,7 @@ class ApplicationAdmin(SwiftAdmin):
             # 构建子表CRUD - schema
             schema_table =await self.get_sub_list_table(self.app.get_model_admin('schema'), request)
             #增加子表外键过滤
-            schema_table.api.data['applicaiton_id'] = f"${self.pk_name}"
+            schema_table.api.data['application_id'] = f"${self.pk_name}"
             #log.debug(table.api)
             schema_tabitem = amis.Tabs.Item(title=_('导 航 项'), icon='fa fa-square', body=schema_table)
             schema_tabitem.disabled = False

@@ -3,7 +3,7 @@
   "tablename": "application",
   "fields": [
     {
-      "name": "applicaiton_id",
+      "name": "application_id",
       "optional": true,
       "type": "int",
       "default_factory": null,
