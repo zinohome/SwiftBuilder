@@ -100,13 +100,13 @@ class Application(SwiftSQLModel, table=True):
                                                     index=False,
                                                     amis_form_item = "",
                                                     amis_table_column = "")
-    database_url_async: str = models.Field(default="mysql+aiomysql://username:password@dbhost:dbport/dtabase?charset=utf8mb4",
+    database_url_async: str = models.Field(default="mysql+aiomysql://username:password@dbhost:dbport/dbname?charset=utf8mb4",
                                                     title='数据库连接(异步)',
                                                     nullable=False,
                                                     index=False,
                                                     amis_form_item = "",
                                                     amis_table_column = "")
-    database_url: str = models.Field(default="mysql+pymysql://username:password@dbhost:dbport/dtabase?charset=utf8mb4",
+    database_url: str = models.Field(default="mysql+pymysql://username:password@dbhost:dbport/dbname?charset=utf8mb4",
                                                     title='数据库连接',
                                                     nullable=False,
                                                     index=False,
