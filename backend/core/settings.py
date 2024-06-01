@@ -21,7 +21,7 @@ BACKEND_DIR = Path(__file__).resolve().parent.parent
 sys.path.append(BACKEND_DIR.__str__())
 appdef = App()
 class Settings(AmisSettings):
-    name: str = 'Swiftapp'
+    name: str = 'SwiftBuilder'
     host: str = '127.0.0.1'
     port: int = 8000
     secret_key: str = ''
